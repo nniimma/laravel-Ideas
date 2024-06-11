@@ -8,7 +8,7 @@
     {{-- icon --}}
     <link rel="icon" href="{{ URL::asset('img/layout/ideas.png') }}">
 
-    <title>Ideas</title>
+    <title>{{ config('app.name') }}</title>
 
     <link href="https://bootswatch.com/5/sketchy/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
