@@ -11,7 +11,12 @@ class IdeaController extends Controller
     {
         $ideas = Idea::orderBy('created_at', 'DESC')->paginate(5);
 
-        return view('ideas.index', ['ideas' => $ideas]);
+        return view('ideas.index', compact('ideas'));
+    }
+
+    public function show(Idea $idea)
+    {
+        return view('ideas.show', compact('idea'));
     }
 
     public function store(StoreIdeaRequest $request)
