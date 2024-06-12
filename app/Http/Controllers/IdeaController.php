@@ -9,7 +9,7 @@ class IdeaController extends Controller
 {
     public function index()
     {
-        $ideas = Idea::orderBy('created_at', 'DESC')->get();
+        $ideas = Idea::orderBy('created_at', 'DESC')->paginate(5);
 
         return view('ideas.index', ['ideas' => $ideas]);
     }
