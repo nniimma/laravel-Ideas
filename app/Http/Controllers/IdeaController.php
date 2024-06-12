@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
+use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
     public function index()
     {
-        $ideas = Idea::orderBy('created_at', 'DESC')->paginate(5);
+        try {
+            $ideas = Idea::orderBy('created_at', 'DESC');
 
-        return view('ideas.index', compact('ideas'));
+            // search
+            if (request()->has('search')) {
+                $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+            }
+            // search
+
+            return view('ideas.index', ['ideas' => $ideas->paginate(5)]);
+        } catch (\Exception $e) {
+            return redirect()->route('idea.index')->with('error', 'Failed to load ideas: ' . $e->getMessage());
+        }
     }
 
     public function show(Idea $idea)
