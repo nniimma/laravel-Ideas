@@ -37,8 +37,8 @@
             </div>
         </div>
         <div class="col-6">
-            {{-- @include('includes.success-message')
-            @include('includes.error-message') --}}
+            @include('includes.success-message')
+            @include('includes.error-message')
             @include('ideas.includes.submit-idea')
             <hr>
             @foreach ($ideas as $idea)

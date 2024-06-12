@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIdeaRequest;
 use App\Models\Idea;
-use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
@@ -17,12 +16,12 @@ class IdeaController extends Controller
 
     public function store(StoreIdeaRequest $request)
     {
-        $idea = Idea::Create(
+        Idea::Create(
             [
                 'content' => $request->idea
             ]
         );
 
-        return redirect()->route('idea.index');
+        return redirect()->route('idea.index')->with('success', 'Idea created successfully.');
     }
 }
