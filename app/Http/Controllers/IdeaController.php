@@ -16,12 +16,25 @@ class IdeaController extends Controller
 
     public function store(StoreIdeaRequest $request)
     {
-        Idea::Create(
-            [
-                'content' => $request->idea
-            ]
-        );
+        try {
+            Idea::create([
+                'content' => $request->idea,
+            ]);
 
-        return redirect()->route('idea.index')->with('success', 'Idea created successfully.');
+            return redirect()->route('idea.index')->with('success', 'Idea created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('idea.index')->with('error', 'Failed to create idea: ' . $e->getMessage());
+        }
+    }
+
+    public function destroy(Idea $idea)
+    {
+        try {
+            $idea->delete();
+
+            return redirect()->route('idea.index')->with('success', 'Idea deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('idea.index')->with('error', 'Failed to delete idea: ' . $e->getMessage());
+        }
     }
 }
