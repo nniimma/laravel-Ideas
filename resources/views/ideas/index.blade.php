@@ -37,13 +37,13 @@
             </div>
         </div>
         <div class="col-6">
-            {{-- @include('shared.error-message')
-            @include('shared.success-message') --}}
-            @include('shared.submit-idea')
+            {{-- @include('includes.success-message')
+            @include('includes.error-message') --}}
+            @include('ideas.includes.submit-idea')
             <hr>
             @foreach ($ideas as $idea)
                 <div class="mt-3">
-                    @include('shared.idea-card')
+                    @include('ideas.includes.idea-card')
                 </div>
             @endforeach
         </div>
