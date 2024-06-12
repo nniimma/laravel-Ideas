@@ -12,4 +12,10 @@ class Idea extends Model
     protected $fillable = [
         'content',
     ];
+
+    public function comments()
+    {
+        // id the foregn key and local key is standard, you don't need to mention it.
+        return $this->hasMany(Comment::class, 'idea_id', 'id');
+    }
 }
