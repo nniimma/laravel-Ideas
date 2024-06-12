@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIdeaRequest;
+use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 
 class IdeaController extends Controller
@@ -19,6 +20,12 @@ class IdeaController extends Controller
         return view('ideas.show', compact('idea'));
     }
 
+    public function edit(Idea $idea)
+    {
+        $editing = true;
+        return view('ideas.show', compact('idea', 'editing'));
+    }
+
     public function store(StoreIdeaRequest $request)
     {
         try {
@@ -29,6 +36,19 @@ class IdeaController extends Controller
             return redirect()->route('idea.index')->with('success', 'Idea created successfully.');
         } catch (\Exception $e) {
             return redirect()->route('idea.index')->with('error', 'Failed to create idea: ' . $e->getMessage());
+        }
+    }
+
+    public function update(UpdateIdeaRequest $request, Idea $idea)
+    {
+        try {
+            $idea->update([
+                'content' => $request->content,
+            ]);
+
+            return redirect()->route('idea.show', $idea)->with('success', 'Idea updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('idea.index')->with('error', 'Failed to update idea: ' . $e->getMessage());
         }
     }
 
