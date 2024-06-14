@@ -47,4 +47,13 @@ class AuthController extends Controller
         }
         return redirect()->route('login')->with('error', 'Something went wrong please try again.');
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'Logged out successfully.');
+    }
 }
