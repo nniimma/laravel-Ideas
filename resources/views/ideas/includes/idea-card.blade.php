@@ -9,15 +9,17 @@
                     <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}</a></h5>
                 </div>
             </div>
-            <div>
-                <form action="{{ route('idea.destroy', $idea->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <a href="{{ route('idea.edit', $idea->id) }}">Edit</a>
-                    <a class="ms-1" href="{{ route('idea.show', $idea->id) }}">View</a>
-                    <button class="btn btn-danger btn-sm ms-1">X</button>
-                </form>
-            </div>
+            @auth
+                <div>
+                    <form action="{{ route('idea.destroy', $idea->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <a href="{{ route('idea.edit', $idea->id) }}">Edit</a>
+                        <a class="ms-1" href="{{ route('idea.show', $idea->id) }}">View</a>
+                        <button class="btn btn-danger btn-sm ms-1">X</button>
+                    </form>
+                </div>
+            @endauth
         </div>
     </div>
     <div class="card-body">

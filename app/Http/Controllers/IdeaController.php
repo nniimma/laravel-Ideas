@@ -33,6 +33,11 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            // abort(404, 'Only the writer of the comment can delete it.');
+            return redirect()->route('idea.index')->with('error', "You can't edit this idea.");
+        }
+
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
@@ -53,6 +58,10 @@ class IdeaController extends Controller
 
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            return redirect()->route('idea.index')->with('error', "You can't edit this idea.");
+        }
+
         try {
             $idea->update([
                 'content' => $request->content,
@@ -66,6 +75,10 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            return redirect()->route('idea.index')->with('error', "You can't delete this idea.");
+        }
+
         try {
             $idea->delete();
 
