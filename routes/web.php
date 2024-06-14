@@ -22,12 +22,12 @@ Route::get('/terms', function () {
 
 // ideas
 Route::get('/', [IdeaController::class, 'index'])->name('idea.index');
-Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('idea.show');
-Route::middleware(['auth'])->group(function () {
-    Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('idea.edit');
-    Route::post('/ideas', [IdeaController::class, 'store'])->name('idea.store');
-    Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('idea.update');
-    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('idea.destroy');
+Route::middleware(['auth'])->prefix('ideas')->as('idea.')->group(function () {
+    Route::get('/{idea}', [IdeaController::class, 'show'])->name('show')->withoutMiddleware('auth');
+    Route::get('/{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
+    Route::post('', [IdeaController::class, 'store'])->name('store');
+    Route::put('/{idea}', [IdeaController::class, 'update'])->name('update');
+    Route::delete('/{idea}', [IdeaController::class, 'destroy'])->name('destroy');
 });
 // ideas
 
