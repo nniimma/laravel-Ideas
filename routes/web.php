@@ -26,5 +26,7 @@ Route::resource('ideas', IdeaController::class)->only(['show']);
 // ideas
 
 // comments
-Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('ideas.comments.store');
+Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('ideas.comments.store')->middleware('auth');
+// the same code above with resource:
+// todo: Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
 // comments
