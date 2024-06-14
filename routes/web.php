@@ -22,6 +22,7 @@ Route::get('/terms', function () {
 // ideas
 Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
 Route::resource('ideas', IdeaController::class)->middleware('auth');
+Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
 // ideas
 
 // comments
