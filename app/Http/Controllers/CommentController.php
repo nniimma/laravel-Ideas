@@ -37,9 +37,9 @@ class CommentController extends Controller
                 'content' => $request->comment,
             ]);
 
-            return redirect()->route('idea.show', $idea->id)->with('success', 'Comment posted successfully.');
+            return redirect()->route('ideas.show', $idea->id)->with('success', 'Comment posted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('idea.show', $idea->id)->with('error', 'Failed to create comment: ' . $e->getMessage());
+            return redirect()->route('ideas.show', $idea->id)->with('error', 'Failed to create comment: ' . $e->getMessage());
         }
     }
 

@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('idea.index')->with('success', 'Account created successfully.');
+        return redirect()->route('ideas.index')->with('success', 'Account created successfully.');
     }
 
     public function login()
@@ -43,7 +43,7 @@ class AuthController extends Controller
     {
         if (auth()->attempt($request->validated())) {
             request()->session()->regenerate();
-            return redirect()->route('idea.index')->with('success', 'Logged in successfully.');
+            return redirect()->route('ideas.index')->with('success', 'Logged in successfully.');
         }
         return redirect()->route('login')->with('error', 'Something went wrong please try again.');
     }

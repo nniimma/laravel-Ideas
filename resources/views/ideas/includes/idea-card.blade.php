@@ -10,12 +10,12 @@
                 </div>
             </div>
             <div>
-                <form action="{{ route('idea.destroy', $idea->id) }}" method="post">
+                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
                     @csrf
                     @method('delete')
-                    <a class="ms-1" href="{{ route('idea.show', $idea->id) }}">View</a>
+                    <a class="ms-1" href="{{ route('ideas.show', $idea->id) }}">View</a>
                     @auth
-                        <a href="{{ route('idea.edit', $idea->id) }}">Edit</a>
+                        <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
                         <button class="btn btn-danger btn-sm ms-1">X</button>
                     @endauth
                 </form>
@@ -24,7 +24,7 @@
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{ route('idea.update', $idea->id) }}" method="post">
+            <form action="{{ route('ideas.update', $idea->id) }}" method="post">
                 @csrf
                 @method('put')
                 <div class="mb-3">

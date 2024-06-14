@@ -22,7 +22,7 @@ class IdeaController extends Controller
 
             return view('ideas.index', ['ideas' => $ideas->paginate(5)]);
         } catch (\Exception $e) {
-            return redirect()->route('idea.index')->with('error', 'Failed to load ideas: ' . $e->getMessage());
+            return redirect()->route('ideas.index')->with('error', 'Failed to load ideas: ' . $e->getMessage());
         }
     }
 
@@ -35,7 +35,7 @@ class IdeaController extends Controller
     {
         if (auth()->id() !== $idea->user_id) {
             // abort(404, 'Only the writer of the comment can delete it.');
-            return redirect()->route('idea.index')->with('error', "You can't edit this idea.");
+            return redirect()->route('ideas.index')->with('error', "You can't edit this idea.");
         }
 
         $editing = true;
@@ -50,16 +50,16 @@ class IdeaController extends Controller
                 'user_id' => auth()->id()
             ]);
 
-            return redirect()->route('idea.index')->with('success', 'Idea created successfully.');
+            return redirect()->route('ideas.index')->with('success', 'Idea created successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('idea.index')->with('error', 'Failed to create idea: ' . $e->getMessage());
+            return redirect()->route('ideas.index')->with('error', 'Failed to create idea: ' . $e->getMessage());
         }
     }
 
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
         if (auth()->id() !== $idea->user_id) {
-            return redirect()->route('idea.index')->with('error', "You can't edit this idea.");
+            return redirect()->route('ideas.index')->with('error', "You can't edit this idea.");
         }
 
         try {
@@ -67,24 +67,24 @@ class IdeaController extends Controller
                 'content' => $request->content,
             ]);
 
-            return redirect()->route('idea.show', $idea)->with('success', 'Idea updated successfully.');
+            return redirect()->route('ideas.show', $idea)->with('success', 'Idea updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('idea.index')->with('error', 'Failed to update idea: ' . $e->getMessage());
+            return redirect()->route('ideas.index')->with('error', 'Failed to update idea: ' . $e->getMessage());
         }
     }
 
     public function destroy(Idea $idea)
     {
         if (auth()->id() !== $idea->user_id) {
-            return redirect()->route('idea.index')->with('error', "You can't delete this idea.");
+            return redirect()->route('ideas.index')->with('error', "You can't delete this idea.");
         }
 
         try {
             $idea->delete();
 
-            return redirect()->route('idea.index')->with('success', 'Idea deleted successfully.');
+            return redirect()->route('ideas.index')->with('success', 'Idea deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('idea.index')->with('error', 'Failed to delete idea: ' . $e->getMessage());
+            return redirect()->route('ideas.index')->with('error', 'Failed to delete idea: ' . $e->getMessage());
         }
     }
 }
