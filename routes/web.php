@@ -20,16 +20,10 @@ Route::get('/terms', function () {
 });
 
 // ideas
-Route::get('/', [IdeaController::class, 'index'])->name('idea.index');
-Route::middleware(['auth'])->prefix('ideas')->as('idea.')->group(function () {
-    Route::get('/{idea}', [IdeaController::class, 'show'])->name('show')->withoutMiddleware('auth');
-    Route::get('/{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
-    Route::post('', [IdeaController::class, 'store'])->name('store');
-    Route::put('/{idea}', [IdeaController::class, 'update'])->name('update');
-    Route::delete('/{idea}', [IdeaController::class, 'destroy'])->name('destroy');
-});
+Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
+Route::resource('ideas', IdeaController::class)->middleware('auth');
 // ideas
 
 // comments
-Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('idea.comment.store');
+Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('ideas.comment.store');
 // comments
