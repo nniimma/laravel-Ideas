@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             // ! constrained make sure that the idea exists that we are making comment for and cascade makes sure when we delete the idea the comments will be deleted as well.
-            $table->foreignId('idea_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('idea_id')->constrained()->cascadeOnDelete();
             $table->string('content');
             $table->timestamps();
         });

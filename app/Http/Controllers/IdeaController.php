@@ -42,6 +42,7 @@ class IdeaController extends Controller
         try {
             Idea::create([
                 'content' => $request->idea,
+                'user_id' => auth()->id()
             ]);
 
             return redirect()->route('idea.index')->with('success', 'Idea created successfully.');

@@ -33,6 +33,7 @@ class CommentController extends Controller
         try {
             Comment::create([
                 'idea_id' => $idea->id,
+                'user_id' => auth()->id(),
                 'content' => $request->comment,
             ]);
 
