@@ -21,10 +21,10 @@ Route::get('/terms', function () {
 
 // ideas
 Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
-Route::resource('ideas', IdeaController::class)->middleware('auth');
-Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
+Route::resource('ideas', IdeaController::class)->middleware('auth')->except(['index', 'show', 'create']);
+Route::resource('ideas', IdeaController::class)->only(['show']);
 // ideas
 
 // comments
-Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('ideas.comment.store');
+Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name('ideas.comments.store');
 // comments

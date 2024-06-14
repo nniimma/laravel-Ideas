@@ -1,5 +1,5 @@
 <div>
-    <form action="{{ route('ideas.comment.store', $idea->id) }}" method="post">
+    <form action="{{ route('ideas.comments.store', $idea->id) }}" method="post">
         @csrf
         <div class="mb-3">
             <textarea placeholder="My comment..." name="comment" class="fs-6 form-control" rows="1">{{ old('comment') }}</textarea>
