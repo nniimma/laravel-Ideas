@@ -2,7 +2,7 @@
     <form action="{{ route('idea.comment.store', $idea->id) }}" method="post">
         @csrf
         <div class="mb-3">
-            <textarea name="comment" class="fs-6 form-control" rows="1">{{ old('comment') }}</textarea>
+            <textarea placeholder="My comment..." name="comment" class="fs-6 form-control" rows="1">{{ old('comment') }}</textarea>
             @error('comment')
                 <p class="error">{{ $message }}</p>
             @enderror
