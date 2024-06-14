@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostLoginRequest;
 use App\Http\Requests\PostRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,5 +32,19 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('idea.index')->with('success', 'Account created successfully.');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function authenticate(PostLoginRequest $request)
+    {
+        if (auth()->attempt($request->validated())) {
+            request()->session()->regenerate();
+            return redirect()->route('idea.index')->with('success', 'Logged in successfully.');
+        }
+        return redirect()->route('login')->with('error', 'Something went wrong please try again.');
     }
 }
