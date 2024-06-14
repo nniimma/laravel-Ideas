@@ -19,4 +19,9 @@ class Idea extends Model
         // id the foregn key and local key is standard, you don't need to mention it.
         return $this->hasMany(Comment::class, 'idea_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
