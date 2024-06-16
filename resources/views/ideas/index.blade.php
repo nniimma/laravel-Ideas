@@ -9,13 +9,18 @@
             @include('includes.error-message')
             @include('ideas.includes.submit-idea')
             <hr>
-            @foreach ($ideas as $idea)
+            @forelse ($ideas as $idea)
                 <div class="mt-3">
                     @include('ideas.includes.idea-card')
                 </div>
-            @endforeach
+            @empty
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <img width="250" src="{{ URL::asset('img/layout/noResult.png') }}" alt="">
+                    <p class="">No results found...</p>
+                </div>
+            @endforelse
             <div class="mt-3">
-                {{ $ideas->links() }}
+                {{ $ideas->withQueryString()->links() }}
             </div>
         </div>
         <div class="col-3">
