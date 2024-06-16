@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,7 @@ Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name(
 // the same code above with resource:
 // todo: Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
 // comments
+
+// profile
+Route::resource('users', UserController::class)->middleware('auth')->only(['show', 'edit', 'update']);
+// profile
