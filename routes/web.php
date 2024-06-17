@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,8 @@ Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name(
 // profile
 Route::resource('users', UserController::class)->middleware('auth')->only(['show', 'edit', 'update']);
 // profile
+
+// follow/unfollow
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])->name('users.follow')->middleware('auth');
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])->name('users.unfollow')->middleware('auth');
+// follow/unfollow
