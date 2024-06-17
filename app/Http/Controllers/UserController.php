@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -32,6 +33,16 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $validated = $request->validated();
+
+        if ($request->image) {
+            $imagePath = $request->image->store('profile', 'public');
+            $validated['image'] = $imagePath;
+
+            if ($user->image) {
+                // delete the last uploaded image:
+                Storage::disk('public')->delete($user->image);
+            }
+        }
         try {
             $user->update($validated);
 

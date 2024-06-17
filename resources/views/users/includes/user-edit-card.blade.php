@@ -5,8 +5,8 @@
             @method('put')
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img style="width:150px" class="me-3 avatar-sm rounded-circle"
-                        src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                    <img id="image-preview" style="width:150px" class="me-3 avatar-sm rounded-circle"
+                        src="{{ $user->getImageURL() }}" alt="{{ $user->name }}">
                     <div>
                         <input name="name" value="{{ $user->name }}" type="text" class="form-control">
                         @error('name')
@@ -58,3 +58,6 @@
     </div>
 </div>
 <hr>
+
+{{-- this is to preview the selected photo --}}
+<script src="{{ URL::asset('JS/userEditImage.js') }}"></script>
