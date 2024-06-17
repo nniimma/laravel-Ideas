@@ -3,6 +3,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-sm-8 col-md-6">
+                @include('includes.error-message')
+                @include('includes.success-message')
                 <form class="form mt-5" action="{{ route('register') }}" method="post">
                     @csrf
                     <h3 class="text-center text-dark">Register</h3>

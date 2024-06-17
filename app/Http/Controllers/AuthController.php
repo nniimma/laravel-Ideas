@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostLoginRequest;
 use App\Http\Requests\PostRegisterRequest;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -25,13 +28,24 @@ class AuthController extends Controller
 
         $request->validated();
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
 
-        return redirect()->route('ideas.index')->with('success', 'Account created successfully.');
+        try {
+            DB::beginTransaction();
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            Mail::to($user->email)->send(new WelcomeEmail($user));
+
+            DB::commit();
+
+            return redirect()->route('ideas.index')->with('success', 'Account created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('register')->with('error', 'Failed to create idea: ' . $e->getMessage());
+        }
     }
 
     public function login()
