@@ -24,7 +24,7 @@ class PostRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:40',
+            'name' => 'required',
             'email' => 'email|required|unique:users,email',
             'password' => 'required|confirmed|min:6'
         ];
