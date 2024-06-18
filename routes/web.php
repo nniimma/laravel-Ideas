@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/terms', function () {
     return view('terms');
-});
+})->name('terms');
 
 // ideas
 Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
