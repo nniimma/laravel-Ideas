@@ -12,7 +12,7 @@ class IdeaController extends Controller
     public function index()
     {
         try {
-            $ideas = Idea::orderBy('created_at', 'DESC');
+            $ideas = Idea::with('user:id,name,image', 'comments.user')->orderBy('created_at', 'DESC');
 
             // search
             if (request()->has('search')) {
