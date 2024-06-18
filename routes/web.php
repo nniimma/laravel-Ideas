@@ -3,6 +3,7 @@
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +35,16 @@ Route::post('/ideas/{idea}/comment', [CommentController::class, 'store'])->name(
 // comments
 
 // profile
-Route::resource('users', UserController::class)->middleware('auth')->only(['show', 'edit', 'update']);
+Route::resource('users', UserController::class)->middleware('auth')->only(['edit', 'update']);
+Route::resource('users', UserController::class)->only(['show']);
 // profile
 
 // follow/unfollow
 Route::post('users/{user}/follow', [FollowerController::class, 'follow'])->name('users.follow')->middleware('auth');
 Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])->name('users.unfollow')->middleware('auth');
 // follow/unfollow
+
+// like/unlike
+Route::post('ideas/{idea}/like', [LikeController::class, 'like'])->name('ideas.like')->middleware('auth');
+Route::post('ideas/{idea}/unlike', [LikeController::class, 'unlike'])->name('ideas.unlike')->middleware('auth');
+// like/unlike
