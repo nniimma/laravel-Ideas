@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
@@ -53,3 +54,7 @@ Route::post('ideas/{idea}/unlike', [LikeController::class, 'unlike'])->name('ide
 // feed
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 // feed
+
+// admin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth', 'admin']);
+// admin
