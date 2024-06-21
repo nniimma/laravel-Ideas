@@ -9,15 +9,17 @@
                             {{ $idea->user->name }}</a></h5>
                 </div>
             </div>
-            <div>
+            <div class="d-flex gap-2">
                 <a class="ms-1" href="{{ route('ideas.show', $idea->id) }}">View</a>
                 @auth
-                    <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
-                    <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-danger btn-sm ms-1">X</button>
-                    </form>
+                    @can('idea.editDelete', $idea)
+                        <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                        <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-sm ms-1">X</button>
+                        </form>
+                    @endcan
                 @endauth
             </div>
         </div>
