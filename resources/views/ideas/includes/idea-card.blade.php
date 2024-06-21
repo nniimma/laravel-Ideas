@@ -10,15 +10,15 @@
                 </div>
             </div>
             <div>
-                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <a class="ms-1" href="{{ route('ideas.show', $idea->id) }}">View</a>
-                    @auth
-                        <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                <a class="ms-1" href="{{ route('ideas.show', $idea->id) }}">View</a>
+                @auth
+                    <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                    <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
+                        @csrf
+                        @method('delete')
                         <button class="btn btn-danger btn-sm ms-1">X</button>
-                    @endauth
-                </form>
+                    </form>
+                @endauth
             </div>
         </div>
     </div>

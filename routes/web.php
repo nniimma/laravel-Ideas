@@ -56,5 +56,5 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 // feed
 
 // admin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth', 'admin']);
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 // admin

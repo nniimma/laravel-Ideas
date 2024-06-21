@@ -6,6 +6,7 @@ use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -33,9 +34,8 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            // abort(404, 'Only the writer of the comment can delete it.');
-            return redirect()->route('ideas.index')->with('error', "You can't edit this idea.");
+        if (!Gate::allows('idea.editDelete', $idea)) {
+            return redirect()->route('ideas.index')->with('error', 'Just admin or owner can edit this idea.');
         }
 
         $editing = true;
@@ -58,8 +58,8 @@ class IdeaController extends Controller
 
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            return redirect()->route('ideas.index')->with('error', "You can't edit this idea.");
+        if (!Gate::allows('idea.editDelete')) {
+            return redirect()->route('ideas.index', $idea)->with('error', 'Just admin or owner can edit this idea.');
         }
 
         try {
@@ -75,8 +75,8 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            return redirect()->route('ideas.index')->with('error', "You can't delete this idea.");
+        if (!Gate::allows('idea.editDelete', $idea)) {
+            return redirect()->route('ideas.index')->with('error', 'Just admin or owner can delete this idea.');
         }
 
         try {
