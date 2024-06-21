@@ -58,7 +58,7 @@ class IdeaController extends Controller
 
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
-        if (!Gate::allows('idea.editDelete')) {
+        if (!Gate::allows('idea.editDelete', $idea)) {
             return redirect()->route('ideas.index', $idea)->with('error', 'Just admin or owner can edit this idea.');
         }
 
@@ -67,7 +67,7 @@ class IdeaController extends Controller
                 'content' => $request->content,
             ]);
 
-            return redirect()->route('ideas.show', $idea)->with('success', 'Idea updated successfully.');
+            return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea updated successfully.');
         } catch (\Exception $e) {
             return redirect()->route('ideas.index')->with('error', 'Failed to update idea: ' . $e->getMessage());
         }
