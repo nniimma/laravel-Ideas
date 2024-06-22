@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    //! here is to send when we use auth and guset middleware:
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
