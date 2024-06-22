@@ -34,7 +34,7 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
-        if (!Gate::allows('idea.editDelete', $idea)) {
+        if (!Gate::allows('update', $idea)) {
             return redirect()->route('ideas.index')->with('error', 'Just admin or owner can edit this idea.');
         }
 
@@ -58,7 +58,7 @@ class IdeaController extends Controller
 
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
-        if (!Gate::allows('idea.editDelete', $idea)) {
+        if (!Gate::allows('update', $idea)) {
             return redirect()->route('ideas.index', $idea)->with('error', 'Just admin or owner can edit this idea.');
         }
 
@@ -75,7 +75,7 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
-        if (!Gate::allows('idea.editDelete', $idea)) {
+        if (!Gate::allows('delete', $idea)) {
             return redirect()->route('ideas.index')->with('error', 'Just admin or owner can delete this idea.');
         }
 

@@ -19,6 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        //! if the name of the policy is not ModelNamePolicy it will not be ditected automatically, in this case we should register it here.
+        // todo: ModelName::class => PolicyName::class
     ];
 
     /**
