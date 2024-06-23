@@ -40,8 +40,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         try {
-            $this->authorize('update', $user);
-
             $validated = $request->validated();
 
             if ($request->image) {

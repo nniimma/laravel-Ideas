@@ -60,8 +60,6 @@ class IdeaController extends Controller
     public function update(UpdateIdeaRequest $request, Idea $idea)
     {
         try {
-            $this->authorize('update', $idea);
-
             $idea->update([
                 'content' => $request->content,
             ]);
