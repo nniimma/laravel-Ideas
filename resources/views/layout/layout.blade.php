@@ -10,7 +10,7 @@
     {{-- icon --}}
     <link rel="icon" href="{{ URL::asset('img/layout/ideas.png') }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title') | {{ config('app.name') }}</title>
 
     <link href="https://bootswatch.com/5/superhero/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
