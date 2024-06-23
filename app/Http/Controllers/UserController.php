@@ -24,10 +24,14 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $this->authorize('update', $user);
+        try {
+            $this->authorize('update', $user);
 
-        $ideas = $user->ideas()->paginate(5);
-        return view('users.edit', compact('user', 'ideas'));
+            $ideas = $user->ideas()->paginate(5);
+            return view('users.edit', compact('user', 'ideas'));
+        } catch (\Exception $e) {
+            return redirect()->route('users.show', $user->id)->with('error', 'Failed to update profile: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -35,20 +39,21 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->authorize('update', $user);
-
-        $validated = $request->validated();
-
-        if ($request->image) {
-            $imagePath = $request->image->store('profile', 'public');
-            $validated['image'] = $imagePath;
-
-            if ($user->image) {
-                // delete the last uploaded image:
-                Storage::disk('public')->delete($user->image);
-            }
-        }
         try {
+            $this->authorize('update', $user);
+
+            $validated = $request->validated();
+
+            if ($request->image) {
+                $imagePath = $request->image->store('profile', 'public');
+                $validated['image'] = $imagePath;
+
+                if ($user->image) {
+                    // delete the last uploaded image:
+                    Storage::disk('public')->delete($user->image);
+                }
+            }
+
             $user->update($validated);
 
             return redirect()->route('users.show', $user->id)->with('success', 'Profile updated successfully.');
