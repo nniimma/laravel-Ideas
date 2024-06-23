@@ -39,9 +39,11 @@ class User extends Authenticatable
      * The attributes that should be cast.
      *
      * @var array<string, string>
+     * ! here you can authomatically hash your pass:
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // todo: 'password' => 'hashed',
     ];
 
     public function ideas()
