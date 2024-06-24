@@ -81,7 +81,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
+    //! we can change the default language here: Portoguese: pt, Persian: fa, Turkish tr, English en, German de
     'locale' => 'en',
 
     /*
@@ -94,7 +94,7 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
+    //! if it couldn't translate to default language, it will translate to fallback_language
     'fallback_locale' => 'en',
 
     /*

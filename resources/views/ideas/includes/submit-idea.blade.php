@@ -16,5 +16,5 @@
     </div>
 @endauth
 @guest
-    <h1 class="d-flex align-items-center justify-content-center">Login to share your ideas.</h1>
+    <h1 class="d-flex align-items-center justify-content-center text-center">@lang('ideas.login-to-share')</h1>
 @endguest
