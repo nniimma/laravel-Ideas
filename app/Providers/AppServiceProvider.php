@@ -37,5 +37,6 @@ class AppServiceProvider extends ServiceProvider
 
         //! to clear the cache: 
         //todo: Cache::flush();
+        //todo: Cache::forget('topUsers');
     }
 }
