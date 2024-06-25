@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,7 +21,6 @@ class IdeaController extends Controller
                 $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
             }
             // search
-
             return view('ideas.index', ['ideas' => $ideas->paginate(5)]);
         } catch (\Exception $e) {
             return redirect()->route('ideas.index')->with('error', 'Failed to load ideas: ' . $e->getMessage());
