@@ -18,7 +18,8 @@ class IdeaController extends Controller
 
             // search
             if (request()->has('search')) {
-                $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+                //! when we want to use scope function(It is coming from the model), we take out the scope from the name:
+                $ideas = $ideas->search(request('search', ''));
             }
             // search
             return view('ideas.index', ['ideas' => $ideas->paginate(5)]);
