@@ -16,15 +16,36 @@
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('terms') ? 'text-white bg-primary round' : '' }}"
                     href="{{ route('terms') }}">
-                    <span>Terms</span>
+                    <span>Terms & Conditions</span>
                 </a>
             </li>
         </ul>
     </div>
-    @auth
-        <div class="card-footer text-center py-2 ">
-            <a class="btn btn-link btn-sm {{ Route::is('users.show') ? 'text-white bg-primary round w-100' : '' }}"
-                href="{{ route('users.show', Auth::id()) }}">View Profile </a>
-        </div>
-    @endauth
+    <div class="card-footer py-2 d-flex flex-column ">
+        <a class="mb-2 text-decoration-none" href="{{ route('lang', 'en') }}">
+            <img class="me-3" width="30" class="mr-5" src="{{ URL::asset('img/flags/USA-flag.png') }}"
+                alt="USA-flag">
+            English
+        </a>
+        <a class="mb-2 text-decoration-none" href="{{ route('lang', 'pt') }}">
+            <img class="me-3" width="30" class="mr-5" src="{{ URL::asset('img/flags/Brazil-flag.png') }}"
+                alt="Brazil-flag">
+            Portoguês
+        </a>
+        <a class="mb-2 text-decoration-none" href="{{ route('lang', 'fa') }}">
+            <img class="me-3" width="30" class="mr-5" src="{{ URL::asset('img/flags/Iran-flag.png') }}"
+                alt="Iran-flag">
+            فارسی
+        </a>
+        <a class="mb-2 text-decoration-none" href="{{ route('lang', 'de') }}">
+            <img class="me-3" width="30" class="mr-5" src="{{ URL::asset('img/flags/Germany-flag.png') }}"
+                alt="Germany-flag">
+            Deutch
+        </a>
+        <a class="mb-2 text-decoration-none" href="{{ route('lang', 'tr') }}">
+            <img class="me-3" width="30" class="mr-5" src="{{ URL::asset('img/flags/Turkey-flag.png') }}"
+                alt="Turkey-flag">
+            Türkçe
+        </a>
+    </div>
 </div>

@@ -58,3 +58,12 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 // admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 // admin
+
+// dynamic language
+Route::get('lang/{lang}', function ($lang) {
+    app()->setLocale($lang);
+    session()->put('locale', $lang);
+
+    return redirect()->route('ideas.index');
+})->name('lang');
+// dynamic language
