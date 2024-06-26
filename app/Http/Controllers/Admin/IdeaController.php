@@ -14,4 +14,15 @@ class IdeaController extends Controller
 
         return view('admin.ideas.index', compact('ideas'));
     }
+
+    public function destroy(Idea $idea)
+    {
+        try {
+            $idea->delete();
+
+            return redirect()->route('admin.ideas.index')->with('success', 'Idea deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.ideas.index')->with('error', 'Failed to delete idea: ' . $e->getMessage());
+        }
+    }
 }

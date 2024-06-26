@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 use App\Http\Controllers\Admin\IdeaController as AdminIdeaController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\IdeaController;
@@ -72,6 +73,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(
 
     // ideas
     Route::get('/ideas', [AdminIdeaController::class, 'index'])->name('ideas.index');
+    Route::delete('/ideas/{idea}', [AdminIdeaController::class, 'destroy'])->name('ideas.destroy');
     // ideas
 
 });

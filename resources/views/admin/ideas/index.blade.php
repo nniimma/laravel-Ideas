@@ -36,7 +36,7 @@
                                 <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
                             </td>
                             <td>
-                                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
+                                <form action="{{ route('admin.ideas.destroy', $idea->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger btn-sm">Delete</button>
