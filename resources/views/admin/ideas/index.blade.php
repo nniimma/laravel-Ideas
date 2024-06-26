@@ -13,7 +13,7 @@
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th>NO</th>
+                        <th>ID</th>
                         <th>Owner</th>
                         <th>Content</th>
                         <th>Created At</th>
@@ -25,7 +25,7 @@
                 <tbody>
                     @foreach ($ideas as $idea)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $idea->id }}</td>
                             <td>{{ $idea->user->name }}</td>
                             <td>{{ $idea->content }}</td>
                             <td>{{ $idea->created_at->toDateString() }}</td>

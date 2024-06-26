@@ -12,7 +12,7 @@
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th>NO</th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Joined At</th>
@@ -25,7 +25,7 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->toDateString() }}</td>
