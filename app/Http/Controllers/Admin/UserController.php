@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function delete(User $user)
+    public function destroy(User $user)
     {
         try {
             $user->delete();

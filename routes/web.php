@@ -67,12 +67,13 @@ Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/toAdmin', [AdminUserController::class, 'updateToAdmin'])->name('users.updateToAdmin');
     Route::patch('/users/{user}/toUser', [AdminUserController::class, 'updateToUser'])->name('users.updateToUser');
-    Route::delete('/users/{user}', [AdminUserController::class, 'delete'])->name('users.delete');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
     // users
 
     // ideas
     Route::get('/ideas', [AdminIdeaController::class, 'index'])->name('ideas.index');
     // ideas
+
 });
 // admin
 
