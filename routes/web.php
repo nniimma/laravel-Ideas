@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\IdeaController as AdminIdeaController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
@@ -58,11 +59,20 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // admin
 Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(function () {
+    // dashboard
     Route::get('/', [AdminController::class, 'index'])->name('index');
+    // dashboard
+
+    // users
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/toAdmin', [AdminUserController::class, 'updateToAdmin'])->name('users.updateToAdmin');
     Route::patch('/users/{user}/toUser', [AdminUserController::class, 'updateToUser'])->name('users.updateToUser');
     Route::delete('/users/{user}', [AdminUserController::class, 'delete'])->name('users.delete');
+    // users
+
+    // ideas
+    Route::get('/ideas', [AdminIdeaController::class, 'index'])->name('ideas.index');
+    // ideas
 });
 // admin
 
