@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
@@ -56,7 +57,13 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 // feed
 
 // admin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth']);
+Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{user}/toAdmin', [AdminUserController::class, 'updateToAdmin'])->name('users.updateToAdmin');
+    Route::patch('/users/{user}/toUser', [AdminUserController::class, 'updateToUser'])->name('users.updateToUser');
+    Route::delete('/users/{user}', [AdminUserController::class, 'delete'])->name('users.delete');
+});
 // admin
 
 // dynamic language
