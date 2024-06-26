@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -51,6 +52,8 @@ class UserController extends Controller
                     Storage::disk('public')->delete($user->image);
                 }
             }
+
+            $validated['updated_at'] = Carbon::now();
 
             $user->update($validated);
 
