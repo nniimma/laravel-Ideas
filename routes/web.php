@@ -76,6 +76,10 @@ Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(
     Route::delete('/ideas/{idea}', [AdminIdeaController::class, 'destroy'])->name('ideas.destroy');
     // ideas
 
+    // comments
+    Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
+    Route::delete('/comments/{comment}', [AdminCommentController::class, 'destroy'])->name('comments.destroy');
+    // comments
 });
 // admin
 
